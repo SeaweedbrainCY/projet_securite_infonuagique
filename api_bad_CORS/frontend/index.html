@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ma banque</title>
+</head>
+<body>
+    <h1>Bienvenue sur votre banque ! </h1>
+    <button onclick="fetchData()">Afficher mon solde</button>
+    <p id="info"></p>
+
+    <script>
+        function fetchData() {
+            // Remplacez l'URL de l'API par l'URL de l'API que vous souhaitez utiliser
+            fetch('http://api.bank.local:8000/account/money')
+                .then(response => response.json())
+                .then(data => {
+                    // Remplacez 'data.title' par la propriété que vous souhaitez afficher
+                    document.getElementById('info').innerHTML = 'Votre solde est de ' + data.amount + ' ' + data.currency;
+                })
+                .catch(error => console.error('Erreur lors de la récupération des données:', error));
+        }
+    </script>
+
+</body>
+</html>

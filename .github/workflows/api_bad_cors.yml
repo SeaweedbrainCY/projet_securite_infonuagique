@@ -5,7 +5,7 @@ on:
      tags: [ 'cors.*' ]
 
 env:
-    API_API_IMAGE_NAME: "api_bad_cors"
+    API_IMAGE_NAME: "api_bad_cors"
     FRONTEND_API_IMAGE_NAME: "frontend_bad_cors"
 
 jobs:

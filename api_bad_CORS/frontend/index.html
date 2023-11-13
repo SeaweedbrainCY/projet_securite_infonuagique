@@ -7,6 +7,7 @@
 </head>
 <body>
     <h1>Bienvenue sur votre banque ! </h1>
+    <h3 style="margin-top: 10px;">Solde</h3>
     <button onclick="fetchData()">Afficher mon solde</button>
     <p id="info"></p>
 
@@ -20,6 +21,52 @@
                     document.getElementById('info').innerHTML = 'Votre solde est de ' + data.amount + ' ' + data.currency;
                 })
                 .catch(error => console.error('Erreur lors de la récupération des données:', error));
+        }
+    </script>
+    <h3 style="margin-top: 10px;">Virement</h3>
+    
+
+    <form id="myForm">
+        <label for="montant">Montant à transférer :</label>
+        <input type="number" id="montant" name="montant" required><br/>
+        <label for="dest">Destinataire :</label>
+        <input type="text" id="dest" name="dest" required> <br>
+        <button type="button" onclick="envoyerAPI()">Effectuer le virement !</button>
+    </form>
+    <p id="success"></p>
+
+    <script>
+        function envoyerAPI() {
+            document.getElementById('success').innerHTML = ""
+            // Récupérer la valeur du montant depuis le formulaire
+            var montant = document.getElementById('montant').value;
+            var dest = document.getElementById('dest').value;
+
+            // Exemple d'URL de l'API (remplacez par votre propre URL)
+            var apiUrl = 'http://api.bank.local:8000/account/transfert';
+
+            // Exemple de requête POST avec fetch
+            fetch(apiUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ amount: montant, dest:dest }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Réponse de l\'API :', data);
+                if(data.status == "success"){
+                    document.getElementById('success').innerHTML = "Succès !"
+                } else if(data.status == "not_enough"){
+                    document.getElementById('success').innerHTML = "Vous n'avez pas assez d'argent !"
+                } else if(data.status == "not_found"){
+                    document.getElementById('success').innerHTML = "Le destinataire n'existe pas !"
+                } else {
+                    document.getElementById('success').innerHTML = "Une erreur est survenue !"
+                }
+            })
+            .catch(error => console.error('Erreur lors de l\'envoi à l\'API:', error));
         }
     </script>
 

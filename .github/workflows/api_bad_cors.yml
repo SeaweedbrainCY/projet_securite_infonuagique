@@ -21,7 +21,7 @@ jobs:
       run: echo ${{ secrets.TOKEN }} | docker login ghcr.io -u ${{ secrets.USERNAME }} --password-stdin
     - name: Push Docker image to GitHub Container Registry
       run: |
-            docker tag $API_IMAGE_NAME:latest ghcr.io/${{ github.repository_owner }}/$API_IMAGE_NAME:latest
-            docker tag $API_IMAGE_NAME:${{ github.sha }} ghcr.io/${{ github.repository_owner }}/$API_IMAGE_NAME:${{ github.sha }}
-            docker push ghcr.io/${{ github.repository_owner }}/$API_IMAGE_NAME:latest
-            docker push ghcr.io/${{ github.repository_owner }}/$API_IMAGE_NAME:${{ github.sha }}
+            docker tag $API_IMAGE_NAME:latest ghcr.io/ ${{ secrets.USERNAME }}/$API_IMAGE_NAME:latest
+            docker tag $API_IMAGE_NAME:${{ github.sha }} ghcr.io/ ${{ secrets.USERNAME }}/$API_IMAGE_NAME:${{ github.sha }}
+            docker push ghcr.io/ ${{ secrets.USERNAME }}/$API_IMAGE_NAME:latest
+            docker push ghcr.io/ ${{ secrets.USERNAME }}/$API_IMAGE_NAME:${{ github.sha }}

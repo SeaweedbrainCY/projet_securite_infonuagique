@@ -44,9 +44,7 @@ async def rename_file(old_name: str, new_name: str):
     print(old_path, new_path)
     if os.path.exists(old_path):
         # Utilisez un script Bash pour renommer le fichier
-        script_path = os.path.join(os.getcwd(), 'rename.sh')
-        # Exécutez le script avec les chemins absolus
-        os.system(f"{script_path} {old_path} {new_path}")
+        os.system(f"./rename.sh {old_path} {new_path}")
         return JSONResponse(content={"message": f"File {old_name} renamed to {new_name}"})
     else:
         raise HTTPException(status_code=404, detail="File not found")

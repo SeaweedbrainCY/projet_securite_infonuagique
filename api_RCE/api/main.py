@@ -48,7 +48,6 @@ async def rename_file(old_name: str, new_name: str):
         return JSONResponse(content={"message": f"File {old_name} renamed to {new_name}"})
     else:
         raise HTTPException(status_code=404, detail="File not found")
-
 @app.delete("/deletefile/{file_name}/")
 async def delete_file(file_name: str):
     file_path = os.path.join(media_folder, file_name)

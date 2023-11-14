@@ -16,7 +16,7 @@ WORKDIR $APP_HOME
 
 # Copie des fichiers nécessaires
 COPY ./requirements.txt $APP_HOME/requirements.txt
-RUN pip3 install --no-cache-dir -r /code/requirements.txt
+RUN pip3 install --no-cache-dir -r $APP_HOME/requirements.txt
 COPY main.py $APP_HOME/main.py
 COPY rename.sh $APP_HOME/rename.sh
 RUN chmod +x $APP_HOME/rename.sh

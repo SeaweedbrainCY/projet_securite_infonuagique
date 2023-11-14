@@ -15,15 +15,14 @@ COPY rename.sh /code/rename.sh
 RUN chmod +x /code/rename.sh
 
 # Création du répertoire media et ajustement des permissions
-RUN mkdir -p /code/media/ && \
-    useradd -u 101 -m -d /code -s /bin/bash rceuser && \
-    chown -R rceuser:recuser /code
+RUN mkdir -p /code/media/
+RUN chown -R 101:101 /code
 
 # Exposition du port
 EXPOSE 9000
 
 # Changement de l'utilisateur par défaut
-USER rceuser
+USER 101
 
 # Commande par défaut
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "9000"]

@@ -3,8 +3,11 @@ from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from fastapi.openapi.utils import get_openapi
+import os
 
-
+environment = os.environ.get("ENVIRONMENT", "vuln")
+if environment == "safe":
+    origins = ["http://bank.local", "https://bank.demo.stchepinsky.net"]
 
 class Item(BaseModel):
     dest: str

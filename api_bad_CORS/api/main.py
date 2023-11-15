@@ -8,7 +8,7 @@ import os
 environment = os.environ.get("ENVIRONMENT", "vuln")
 origins = ["*"]
 if environment == "safe":
-    origins = ["http://bank.local", "https://bank.demo.stchepinsky.net"]
+    origins = ["bank.local", "bank.demo.stchepinsky.net"]
 
 class Item(BaseModel):
     dest: str

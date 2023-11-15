@@ -6,6 +6,7 @@ from fastapi.openapi.utils import get_openapi
 import os
 
 environment = os.environ.get("ENVIRONMENT", "vuln")
+origins = ["*"]
 if environment == "safe":
     origins = ["http://bank.local", "https://bank.demo.stchepinsky.net"]
 
@@ -17,7 +18,7 @@ class Item(BaseModel):
 app = FastAPI()
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

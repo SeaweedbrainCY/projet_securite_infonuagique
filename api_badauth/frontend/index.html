@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Remote Code Execution Page</title>
+    <link rel="stylesheet" href="index.css">
+    <script src="script.js"></script>
+
+</head>
+<body>
+
+<div class="main">
+        <div class="title">
+        <div class="above">
+            <div class="img-wrapper">
+                <img src="nasa-Q1p7bh3SHj8-unsplash.jpg" alt="indexbackground" loading="lazy">
+            </div>
+            <h1>Bad Authentification Page</h1>
+
+<!-- Registration Form -->
+<h2>Register</h2>
+<form id="registrationForm">
+    <div class="form-group">
+    <label for="regUsername">Username:</label>
+    <input type="text" id="regUsername" name="regUsername" required>
+    </div>
+    <div class="form-group">
+    <label for="regPassword">Password:</label>
+    <input type="password" id="regPassword" name="regPassword" required>
+    </div>
+    <button type="button" onclick="registerUser()">Register</button>
+</form>
+
+<!-- Login Form -->
+<h2>Login</h2>
+<form id="loginForm">
+    <div class="form-group">
+    <label for="loginUsername">Username:</label>
+    <input type="text" id="loginUsername" name="loginUsername" required>
+    </div>
+    <div class="form-group">
+    <label for="loginPassword">Password:</label>
+    <input type="password" id="loginPassword" name="loginPassword" required>
+    </div>
+    <button type="button" onclick="login()">Login</button>
+</form>
+
+</div>
+        </div>
+    </div>
+
+<div id="protectedResource" style="display: none;">
+    <h2>Protected Resource</h2>
+    <p id="resourceContent"></p>
+</div>
+
+
+</body>
+</html>

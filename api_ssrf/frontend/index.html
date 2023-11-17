@@ -46,24 +46,37 @@
         function downloadMedia() {
             var mediaUrl = document.getElementById('mediaInput').value;
 
-            // Vérifiez le type de média et utilisez les bonnes balises HTML pour le téléchargement.
-            if (mediaUrl.match(/\.(jpeg|jpg|gif|png)$/) != null) {
-                var a = document.createElement('a');
-                a.href = mediaUrl;
-                a.download = 'image';
+            const apiUrl = 'http://api.image-download.local:8000/safe/fetch/image?url=' + mediaUrl;
+            fetch(apiUrl)
+            .then(response => response.blob())
+            .then(blob => {
+                // if not 200 status :
+                if (blob.type == 'application/json') {
+                    blob.text().then(text => {
+                        alert(text);
+                    });
+                    return;
+                }
+
+                // Créer un objet URL pour le blob
+                const url = window.URL.createObjectURL(new Blob([blob]));
+
+                // Créer un élément <a> pour simuler le téléchargement
+                const a = document.createElement('a');
+                a.href = url;
+                let extension = mediaUrl.split('.')[mediaUrl.split('.').length - 1]
+                a.download = 'file.'+extension; // Nom du fichier à télécharger
+
+                // Ajouter l'élément <a> à la page et le déclencher
                 document.body.appendChild(a);
                 a.click();
+
+                // Nettoyer l'objet URL et supprimer l'élément <a>
+                window.URL.revokeObjectURL(url);
                 document.body.removeChild(a);
-            } else if (mediaUrl.match(/\.(mp4|webm|ogg)$/) != null) {
-                var a = document.createElement('a');
-                a.href = mediaUrl;
-                a.download = 'video';
-                document.body.appendChild(a);
-                a.click();
-                document.body.removeChild(a);
-            } else {
-                alert('Le format du média n\'est pas pris en charge.');
-            }
+            })
+            .catch(error => console.error('Erreur lors de la requête à l\'API:', error));
+
         }
     </script>
 </body>

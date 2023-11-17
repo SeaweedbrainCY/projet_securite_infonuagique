@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Téléchargement de Médias</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            margin: 50px;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        #mediaInput {
+            width: 80%;
+            padding: 10px;
+            margin: 20px 0;
+        }
+
+        #downloadButton {
+            background-color: #4caf50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        #downloadButton:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h1>Téléchargement de Médias</h1>
+    <input type="text" id="mediaInput" placeholder="Entrez le lien de l'image, de la vidéo ou du GIF">
+    <br>
+    <button id="downloadButton" onclick="downloadMedia()">Télécharger</button>
+
+    <script>
+        function downloadMedia() {
+            var mediaUrl = document.getElementById('mediaInput').value;
+
+            // Vérifiez le type de média et utilisez les bonnes balises HTML pour le téléchargement.
+            if (mediaUrl.match(/\.(jpeg|jpg|gif|png)$/) != null) {
+                var a = document.createElement('a');
+                a.href = mediaUrl;
+                a.download = 'image';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+            } else if (mediaUrl.match(/\.(mp4|webm|ogg)$/) != null) {
+                var a = document.createElement('a');
+                a.href = mediaUrl;
+                a.download = 'video';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+            } else {
+                alert('Le format du média n\'est pas pris en charge.');
+            }
+        }
+    </script>
+</body>
+</html>

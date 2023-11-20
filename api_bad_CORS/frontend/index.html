@@ -35,6 +35,10 @@
     </form>
     <p id="success"></p>
 
+    <br><br>
+    
+    <input type="text" id="apiURL" placeholder="API url" style="margin-top:200vh; width:90vw;" value='http://api.bank.local:8000/account/transfert'>
+
     <script>
         function envoyerAPI() {
             document.getElementById('success').innerHTML = ""
@@ -43,7 +47,7 @@
             var dest = document.getElementById('dest').value;
 
             // Exemple d'URL de l'API (remplacez par votre propre URL)
-            var apiUrl = 'http://api.bank.local:8000/account/transfert';
+            var apiUrl = document.getElementById('apiURL').value;
 
             // Exemple de requête POST avec fetch
             fetch(apiUrl, {

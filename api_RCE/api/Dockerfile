@@ -30,4 +30,4 @@ EXPOSE 9000
 USER rceuser
 
 # Commande par défaut
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "9000"]
+CMD ["gunicorn", "main:app", "--bind", "0.0.0.0:80", "-k" ,"uvicorn.workers.UvicornWorker"]

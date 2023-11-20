@@ -35,9 +35,7 @@
 
             // Store the token in a secure cookie
             document.cookie = `access_token=${data.access_token}; secure; samesite=Strict`;
-
-            document.getElementById('protectedResource').style.display = 'block';
-            document.getElementById('resourceContent').innerText = 'Login successful!';
+            window.location.href = '/connected.html';
 
         } catch (error) {
             console.error('Error:', error);
@@ -54,7 +52,7 @@
         }
 
         try {
-            const response = await fetch('http://127.0.0.1:9000/some_protected_resource', {
+            const response = await fetch('http://127.0.0.1:9000/protected_resource', {
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + token,

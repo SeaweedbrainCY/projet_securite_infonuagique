@@ -22,10 +22,10 @@ COPY main.py $APP_HOME/main.py
 RUN chown -R badauthuser:badauthuser $APP_HOME
 
 # Exposition du port
-EXPOSE 9000
+EXPOSE 80
 
 # Changement de l'utilisateur par défaut
 USER badauthuser
 
 # Commande par défaut
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "9000"]
+CMD ["gunicorn", "main:app", "--bind", "0.0.0.0:80", "-k" ,"uvicorn.workers.UvicornWorker"]

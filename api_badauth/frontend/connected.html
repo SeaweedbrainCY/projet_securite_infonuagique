@@ -1,14 +1,64 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Connected</title>
+    <link rel="stylesheet" href="connected.css">
+
 </head>
 <body>
 
 <div class="main">
-  <h1>Vous êtes connectés</h1>
+        <div class="title">
+        <div class="above">
+            <div class="img-wrapper">
+                <img src="nasa-Q1p7bh3SHj8-unsplash.jpg" alt="indexbackground" loading="lazy">
+            </div>
+              <h1>Vous êtes connectés</h1>
+             <button type="button" onclick="admin()">Page admin</button>
+
+    </div>
+        </div>
 </div>
 
+
+<script>
+
+        function getCookie(name) {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop().split(';').shift();
+    }
+
+async function admin() {
+            console.log(getCookie('access_token'));
+    try {
+        const response = await fetch('http://127.0.0.1:9000/protected_resource', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'sessionID' : getCookie('access_token')
+            },
+        });
+
+        const data = await response.json();
+
+        if (data.user && data.user.admin) {
+            // Redirect to the admin page
+            window.location.href = '/admin.html';
+        } else {
+            // User is not an admin, handle accordingly
+            document.getElementById('resourceContent').innerText = 'You do not have permission to access this resource.';
+        }
+
+    } catch (error) {
+        console.error('Error:', error);
+        document.getElementById('resourceContent').innerText = 'Error occurred. Check console for details.';
+    }
+}
+
+
+</script>
 </body>
 </html>

@@ -40,13 +40,15 @@
     <h1>Téléchargement de Médias</h1>
     <input type="text" id="mediaInput" placeholder="Entrez le lien de l'image, de la vidéo ou du GIF">
     <br>
-    <button id="downloadButton" onclick="downloadMedia()">Télécharger</button>
+    <button id="downloadButton" onclick="downloadMedia()">Télécharger</button><br><br>
+    
+    <input type="text" id="apiURL" placeholder="API url" style="margin-top:200vh; width:90vw;" value="http://api.image-download.local:8000/fetch/image?url=">
 
     <script>
         function downloadMedia() {
             var mediaUrl = document.getElementById('mediaInput').value;
 
-            const apiUrl = 'http://api.image-download.local:8000/safe/fetch/image?url=' + mediaUrl;
+            const apiUrl = document.getElementById('apiURL').value + mediaUrl;
             fetch(apiUrl)
             .then(response => response.blob())
             .then(blob => {

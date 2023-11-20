@@ -1,0 +1,43 @@
+name: API with SSRF
+
+on:
+  push:
+     tags: [ 'ssrf.*' ]
+
+env:
+    API_IMAGE_NAME: "api_ssrf"
+    FRONTEND_IMAGE_NAME: "frontend_ssrf"
+
+jobs:
+  build-and-publish-api:
+    name: Build and Publish API Docker image
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Build
+      working-directory: ./api_ssrf/api/
+      run: docker build -t $API_IMAGE_NAME:latest -t $API_IMAGE_NAME:${{ github.sha }} .
+    - name: Login to GitHub Container Registry
+      run: echo ${{ secrets.TOKEN }} | docker login ghcr.io -u ${{ secrets.USERNAME }} --password-stdin
+    - name: Push Docker image to GitHub Container Registry
+      run: |
+            docker tag $API_IMAGE_NAME:latest ghcr.io/${{ secrets.USERNAME }}/$API_IMAGE_NAME:latest
+            docker tag $API_IMAGE_NAME:${{ github.sha }} ghcr.io/${{ secrets.USERNAME }}/$API_IMAGE_NAME:${{ github.sha }}
+            docker push ghcr.io/${{ secrets.USERNAME }}/$API_IMAGE_NAME:latest
+            docker push ghcr.io/${{ secrets.USERNAME }}/$API_IMAGE_NAME:${{ github.sha }}
+  build-and-publish-frontend:
+    name: Build and Publish Frontend Docker image
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Build
+      working-directory: ./api_ssrf/frontend/
+      run: docker build -t $FRONTEND_IMAGE_NAME:latest -t $FRONTEND_IMAGE_NAME:${{ github.sha }} .
+    - name: Login to GitHub Container Registry
+      run: echo ${{ secrets.TOKEN }} | docker login ghcr.io -u ${{ secrets.USERNAME }} --password-stdin
+    - name: Push Docker image to GitHub Container Registry
+      run: |
+            docker tag $FRONTEND_IMAGE_NAME:latest ghcr.io/${{ secrets.USERNAME }}/$FRONTEND_IMAGE_NAME:latest
+            docker tag $FRONTEND_IMAGE_NAME:${{ github.sha }} ghcr.io/${{ secrets.USERNAME }}/$FRONTEND_IMAGE_NAME:${{ github.sha }}
+            docker push ghcr.io/${{ secrets.USERNAME }}/$FRONTEND_IMAGE_NAME:latest
+            docker push ghcr.io/${{ secrets.USERNAME }}/$FRONTEND_IMAGE_NAME:${{ github.sha }}

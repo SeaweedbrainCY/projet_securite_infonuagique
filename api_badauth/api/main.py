@@ -56,7 +56,7 @@ async def get_current_user(sessionID: str = Header(..., convert_underscores=Fals
 
 
 #OK ça marche
-@app.post("/token", response_model=dict)
+@app.post("/api/token", response_model=dict)
 async def login(username: str, password: str):
     # Verify username and password (not shown for simplicity)
     if any(user["username"] == username for user in fake_users_db):
@@ -67,7 +67,7 @@ async def login(username: str, password: str):
         raise HTTPException(status_code=400, detail="Username doesn't exist")
 
 #OK ça marche
-@app.post("/register", response_model=dict)
+@app.post("/api/register", response_model=dict)
 async def register(username: str, password: str):
 
     # Check if the username is already taken
@@ -78,7 +78,7 @@ async def register(username: str, password: str):
     fake_users_db.append({"username": username, "password": password})
     return {"message": "User registered successfully"}
 
-@app.get("/protected_resource", response_model=dict)
+@app.get("/api/protected_resource", response_model=dict)
 async def get_protected_resource(current_user: dict = Depends(get_current_user)):
     print(current_user.get("admin", True))
     if current_user.get("admin", True):

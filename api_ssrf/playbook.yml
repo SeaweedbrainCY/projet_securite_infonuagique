@@ -1,0 +1,29 @@
+---
+- name: Déployer et exécuter Docker Compose
+  hosts: all
+  become: true
+  become_method: sudo
+  tasks:
+    - name: Copier le script.sh local à distance
+      copy:
+        src: ./script.sh
+        dest: /root/script.sh
+        mode: '0755'  # Assurez-vous que le script est exécutable
+
+    - name: Exécuter le script.sh à distance
+      command: /root/script.sh
+
+    - name: Copier docker-compose.yml à distance
+      copy:
+        src: ./docker-compose.yml
+        dest: /root/docker-compose.yml
+    
+    - name: Copier nginx.conf à distance
+      copy:
+        src: ./nginx.conf
+        dest: /root/nginx.conf
+
+    - name: Exécuter docker-compose up -d
+      command: docker compose up -d
+      args:
+        chdir: /root

@@ -23,7 +23,13 @@
         src: ./nginx.conf
         dest: /root/nginx.conf
 
-    - name: Exécuter docker-compose up -d
+
+    - name: Pulling images
+      command: docker compose pull 
+      args:
+        chdir: /root
+
+    - name: Starting containers
       command: docker compose up -d
       args:
         chdir: /root

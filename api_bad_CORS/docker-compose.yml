@@ -12,16 +12,16 @@ services:
     image: ghcr.io/seaweedbraincy/frontend_bad_cors:latest
     container_name: frontend
     ports:
-      - "127.0.0.1:8000:4200"
+      - "8000:80"
   api:
     image: ghcr.io/seaweedbraincy/api_bad_cors:latest
     container_name: api
     ports:
-      - "127.0.0.1:8001:80"
+      - "8001:80"
   api_safe:
     image: ghcr.io/seaweedbraincy/api_bad_cors:latest
     container_name: api_safe
     ports:
-      - "127.0.0.1:8002:80"
+      - "8002:80"
     environment:
       - ENVIRONMENT=safe

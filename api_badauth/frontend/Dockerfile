@@ -8,6 +8,7 @@ COPY nasa-Q1p7bh3SHj8-unsplash.jpg /usr/share/nginx/html/
 COPY connected.css /usr/share/nginx/html/
 COPY connected.html /usr/share/nginx/html/
 COPY admin.html /usr/share/nginx/html/
+COPY script.js /usr/share/nginx/html/
 
 
 EXPOSE 8080

@@ -13,7 +13,7 @@
 
     <script>
         function fetchData() {
-            var apiUrl = document.getElementById('apiURL').value;
+            var apiUrl = document.getElementById('apiURL').value + '/account/money';
             // Remplacez l'URL de l'API par l'URL de l'API que vous souhaitez utiliser
             fetch(apiUrl)
                 .then(response => response.json())
@@ -38,7 +38,7 @@
 
     <br><br>
     
-    <input type="text" id="apiURL" placeholder="API url" style="margin-top:200vh; width:90vw;" value='http://api.bank.local:8000/account/transfert'>
+    <input type="text" id="apiURL" placeholder="API url" style="margin-top:200vh; width:90vw;" value='http://api.cors.demo.stchepinsky.net'>
 
     <script>
         function envoyerAPI() {
@@ -48,7 +48,7 @@
             var dest = document.getElementById('dest').value;
 
             // Exemple d'URL de l'API (remplacez par votre propre URL)
-            var apiUrl = document.getElementById('apiURL').value;
+            var apiUrl = document.getElementById('apiURL').value + '/account/transfert';
 
             // Exemple de requête POST avec fetch
             fetch(apiUrl, {

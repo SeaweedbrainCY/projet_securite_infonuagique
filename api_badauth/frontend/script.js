@@ -3,7 +3,7 @@
         const password = document.getElementById('regPassword').value;
 
         try {
-            const response = await fetch('http://127.0.0.1:9000/register?username='+username+'&password='+password, {
+            const response = await fetch('http://api.badauth.demo.stchepinsky.net/register?username='+username+'&password='+password, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -24,7 +24,7 @@
         const password = document.getElementById('loginPassword').value;
 
         try {
-            const response = await fetch('http://127.0.0.1:9000/token?username='+username+'&password='+password, {
+            const response = await fetch('http://api.badauth.demo.stchepinsky.net/token?username='+username+'&password='+password, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -52,7 +52,7 @@
         }
 
         try {
-            const response = await fetch('http://127.0.0.1:9000/protected_resource', {
+            const response = await fetch('http://api.badauth.demo.stchepinsky.net/protected_resource', {
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + token,

@@ -166,3 +166,4 @@ cython_debug/
 .terraform*
 terraform*
 tf-plan
+tf.plan

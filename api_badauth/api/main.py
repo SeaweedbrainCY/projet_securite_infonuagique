@@ -4,7 +4,7 @@ from jose import jwt, JWTError
 from datetime import datetime, timedelta
 from fastapi.middleware.cors import CORSMiddleware
 
-app = FastAPI(root_path="/api")
+app = FastAPI()
 
 
 

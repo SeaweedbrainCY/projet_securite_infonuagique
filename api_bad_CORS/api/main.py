@@ -10,7 +10,7 @@ origins = ["*"]
 if environment == "safe":
     origins = [
         "http://bank.local:4200", 
-        "https://bank.demo.stchepinsky.net"
+        "http://cors.demo.stchepinsky.net"
         ]
 
 class Item(BaseModel):

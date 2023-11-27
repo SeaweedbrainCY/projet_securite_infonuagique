@@ -13,8 +13,9 @@
 
     <script>
         function fetchData() {
+            var apiUrl = document.getElementById('apiURL').value;
             // Remplacez l'URL de l'API par l'URL de l'API que vous souhaitez utiliser
-            fetch('http://api.bank.local:8000/account/money')
+            fetch(apiUrl)
                 .then(response => response.json())
                 .then(data => {
                     // Remplacez 'data.title' par la propriété que vous souhaitez afficher

@@ -11,7 +11,7 @@ import ipaddress
 
 origins = [
         "http://image-download.local:4200", 
-        "https://image-download.demo.stchepinsky.net"
+        "http://ssrf.demo.stchepinsky.net"
         ]
 
 class Item(BaseModel):

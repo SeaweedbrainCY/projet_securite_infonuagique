@@ -23,7 +23,18 @@
         src: ./nginx.conf
         dest: /root/nginx.conf
 
-    - name: Exécuter docker-compose up -d
+    - name: Stopping current containers
+      command: docker compose down 
+      args:
+        chdir: /root
+
+
+    - name: Pulling images
+      command: docker compose pull 
+      args:
+        chdir: /root
+
+    - name: Starting containers
       command: docker compose up -d
       args:
         chdir: /root

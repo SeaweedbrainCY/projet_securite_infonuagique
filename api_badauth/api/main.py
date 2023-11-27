@@ -6,7 +6,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
 
-app.include_router(prefix="/api")
+
 
 # Configuration de CORS pour permettre les requêtes depuis n'importe quel origine
 origins = ["*"]

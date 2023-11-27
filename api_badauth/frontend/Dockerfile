@@ -9,6 +9,7 @@ COPY connected.css /usr/share/nginx/html/
 COPY connected.html /usr/share/nginx/html/
 COPY admin.html /usr/share/nginx/html/
 
+
 EXPOSE 8080
 RUN  touch /var/run/nginx.pid && \
      chown -R nginx:nginx /var/cache/nginx /var/run/nginx.pid

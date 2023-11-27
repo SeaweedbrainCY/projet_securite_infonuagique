@@ -6,7 +6,7 @@ function uploadFile() {
         var formData = new FormData();
         formData.append('file', file);
 
-        fetch('http://18.207.221.99:9000/uploadfile/', {
+        fetch('http://127.0.0.1:8000/uploadfile/', {
             method: 'POST',
             body: formData,
         })
@@ -29,7 +29,7 @@ function renameFile(filename) {
             var name = nameInput.value.trim();
 
             if (name !== '') {
-                fetch(`http://18.207.221.99:9000/renamefile/${filename}/${name}/`, {
+                fetch(`http://127.0.0.1:8000/renamefile/${filename}/${name}/`, {
                     method: 'PUT',
                 })
                 .then(response => response.json())
@@ -49,7 +49,7 @@ function renameFile(filename) {
          // Fonction pour récupérer la liste des fichiers depuis l'API
         async function getFileList() {
             try {
-                const response = await fetch('http://18.207.221.99:9000/listfiles/');
+                const response = await fetch('http://127.0.0.1:8000/listfiles/');
                 const data = await response.json();
                 return data.files;
             } catch (error) {
@@ -61,7 +61,7 @@ function renameFile(filename) {
         // Fonction pour supprimer un fichier
         async function deleteFile(fileName) {
             try {
-                const response = await fetch(`http://18.207.221.99:9000/deletefile/${fileName}/`, {
+                const response = await fetch(`http://127.0.0.1:8000/deletefile/${fileName}/`, {
                     method: 'DELETE',
                 });
                 const data = await response.json();

@@ -18,8 +18,6 @@ WORKDIR $APP_HOME
 COPY ./requirements.txt $APP_HOME/requirements.txt
 RUN pip3 install --no-cache-dir -r $APP_HOME/requirements.txt
 COPY main.py $APP_HOME/main.py
-COPY rename.sh $APP_HOME/rename.sh
-RUN chmod +x $APP_HOME/rename.sh
 
 RUN chown -R rceuser:rceuser $APP_HOME
 

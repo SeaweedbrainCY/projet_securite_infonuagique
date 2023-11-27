@@ -17,7 +17,7 @@ app.add_middleware(
 )
 
 SECRET_KEY = "ungrandsecret"
-ALGORITHM = ['HS256','None']
+ALGORITHM = ['HS256']
 ACCESS_TOKEN_EXPIRE_MINUTES = 30
 
 # Database to store user information (in-memory for simplicity)
@@ -41,16 +41,8 @@ async def get_current_user(sessionID: str = Header(..., convert_underscores=Fals
         headers={"WWW-Authenticate": "Bearer"},
     )
     try:
-        for algo in ALGORITHM:
-            try:
-                if algo != 'None':
-                    payload = jwt.decode(sessionID, SECRET_KEY, algorithms=[algo])
-                else:
-                    print("Algo none for test only")
-                    payload = jwt.decode(sessionID, SECRET_KEY, options={"verify_signature": False})
-                return payload
-            except JWTError:
-                continue
+        payload = jwt.decode(sessionID, SECRET_KEY, algorithms=ALGORITHM)
+        return payload
     except JWTError:
         raise credentials_exception
 
@@ -80,7 +72,6 @@ async def register(username: str, password: str):
 
 @app.get("/protected_resource", response_model=dict)
 async def get_protected_resource(current_user: dict = Depends(get_current_user)):
-    print(current_user.get("admin", True))
     if current_user.get("admin", True):
         return {"message": "This is a protected resource", "user": current_user}
     else:

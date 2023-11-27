@@ -4,24 +4,29 @@
   become: true
   become_method: sudo
   tasks:
-    - name: Copier le script.sh local à distance
+    - name: send docker install script
       copy:
         src: ./script.sh
         dest: /root/script.sh
         mode: '0755'  # Assurez-vous que le script est exécutable
 
-    - name: Exécuter le script.sh à distance
+    - name: Installing docker
       command: /root/script.sh
 
-    - name: Copier docker-compose.yml à distance
+    - name: Send docker-compose.yml
       copy:
         src: ./docker-compose.yml
         dest: /root/docker-compose.yml
     
-    - name: Copier nginx.conf à distance
+    - name: Send nginx.conf
       copy:
         src: ./nginx.conf
         dest: /root/nginx.conf
+
+    - name: Stopping current containers
+      command: docker compose down 
+      args:
+        chdir: /root
 
 
     - name: Pulling images

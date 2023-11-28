@@ -64,7 +64,7 @@ async def fetch_safe(url:str):
     if ipaddress.ip_address(ip).is_private:
         print("Private IP not allowed")
         raise HTTPException(status_code=403, detail="Private IP not allowed")
-    img = requests.get(url)
+    img = requests.get(url, allow_redirects=False)
     if img.headers["Content-Type"] != "image/png" and img.headers["Content-Type"] != "image/jpeg" and img.headers["Content-Type"] != "image/gif" and img.headers["Content-Type"] != "image/webp" and img.header["Content-Type"] != "image/mp4":
         print("Not an image extension")
         raise HTTPException(status_code=404, detail="Image not found")

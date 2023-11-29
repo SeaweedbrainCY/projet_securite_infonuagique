@@ -10,7 +10,7 @@ app = FastAPI()
 
 
 # Configuration de CORS pour permettre les requêtes depuis n'importe quel origine
-origins = ["*"]
+origins = ["badauth.demo.stchepinsky.net"]
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,

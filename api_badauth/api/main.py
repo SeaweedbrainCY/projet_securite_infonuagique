@@ -1,8 +1,9 @@
-from fastapi import FastAPI, Depends, HTTPException, Header
+from fastapi import FastAPI, Depends, HTTPException, Header, Cookie, status
 from fastapi.security import OAuth2PasswordBearer
 from jose import jwt, JWTError
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
 
 app = FastAPI()
 
@@ -28,9 +29,12 @@ fake_users_db = [{"username": "root", "password": "root"}]
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 
 
-def create_token(data: dict):
+def create_token(data: dict, expires_delta: timedelta = None):
     to_encode = data.copy()
-    expire = datetime.utcnow() + timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
+    if expires_delta:
+        expire = datetime.utcnow() + expires_delta
+    else:
+        expire = datetime.utcnow() + timedelta(minutes=15)
     to_encode.update({"exp": expire})
     encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM[0])
     return encoded_jwt
@@ -64,14 +68,17 @@ async def login(username: str, password: str):
         # Assume verification is successful, create a token
         token = create_token({"sub": username, "admin": False})
 
-        response = {"access_token": token, "token_type": "bearer"}
-
+        response = JSONResponse(
+            content={"access_token": token, "token_type": "bearer"},
+            status_code=status.HTTP_200_OK,
+        )
         # Set the cookie
         expires = datetime.utcnow() + timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
+        expires_utc = expires.replace(tzinfo=timezone.utc)
         response.set_cookie(
             key="Authorization",
             value=f"Bearer {token}",
-            expires=expires,
+            expires=expires_utc,
             httponly=True,
             max_age=ACCESS_TOKEN_EXPIRE_MINUTES * 60,
             secure=False,  # Set it to True if your app is served over HTTPS

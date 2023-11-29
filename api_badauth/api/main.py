@@ -10,7 +10,7 @@ app = FastAPI()
 
 
 # Configuration de CORS pour permettre les requêtes depuis n'importe quel origine
-origins = ["badauth.demo.stchepinsky.net"]
+origins = ["http://badauth.demo.stchepinsky.net"]
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
@@ -84,6 +84,7 @@ async def login(username: str, password: str):
             secure=False,  # Set it to True if your app is served over HTTPS
             samesite="Lax",  # Set it to "Lax" or "Strict" if your app is served over HTTPS
         )
+
 
         return response
     else:

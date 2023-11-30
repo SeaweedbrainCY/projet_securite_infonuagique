@@ -80,7 +80,7 @@ async def login(username: str, password: str):
             expires=expires_utc,
             httponly=True,
             max_age=ACCESS_TOKEN_EXPIRE_MINUTES * 60,
-            secure=True,  # Set it to True if your app is served over HTTPS
+            secure=False,  # Set it to True if your app is served over HTTPS
             samesite="Lax",  # Set it to "Lax" or "Strict" if your app is served over HTTPS
             domain=".demo.stchepinsky.net",
         )

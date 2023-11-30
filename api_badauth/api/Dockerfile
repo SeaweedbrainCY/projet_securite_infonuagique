@@ -28,5 +28,5 @@ EXPOSE 80
 USER badauthuser
 
 # Commande par défaut
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0","-p", "80", "--root-path", "/api"]
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0","--port", "80", "--root-path", "/api"]
 

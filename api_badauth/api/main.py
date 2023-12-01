@@ -9,7 +9,7 @@ app = FastAPI()
 
 
 
-origins = ["http://badauth.demo.stchepinsky.net"]
+origins = ["https://badauth.demo.stchepinsky.net"]
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,

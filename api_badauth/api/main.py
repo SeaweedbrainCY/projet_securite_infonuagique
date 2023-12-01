@@ -5,7 +5,7 @@ from datetime import datetime, timedelta, timezone
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
-app = FastAPI()
+app = FastAPI(root_path="/api")
 
 
 

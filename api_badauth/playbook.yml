@@ -18,11 +18,6 @@
         src: ./docker-compose.yml
         dest: /root/docker-compose.yml
 
-    - name: Copier nginx.conf à distance
-      copy:
-        src: ./nginx.conf
-        dest: /root/nginx.conf
-
     - name: Exécuter docker-compose up -d
       command: docker compose up -d
       args:

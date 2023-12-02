@@ -15,9 +15,16 @@
             <div class="img-wrapper">
                 <img src="nasa-Q1p7bh3SHj8-unsplash.jpg" alt="indexbackground" loading="lazy">
             </div>
+            <div class="all">
+                <div class="inside1">
               <h1>Vous êtes connectés</h1>
-             <button type="button" onclick="admin()">Page admin</button>
-
+             <button type="button" onclick="admin()">Page admin</button></div>
+<div class="inside">
+            <label for="urlInput" id="url">Nouvelle URL : </label>
+    <input type="text" id="urlInput">
+    <button onclick="changerURL()">Changer l'URL</button>
+                </div>
+    </div>
     </div>
         </div>
 </div>
@@ -31,10 +38,23 @@
         if (parts.length === 2) return parts.pop().split(';').shift();
     }
 
+    let url =  "https://badauth.demo.stchepinsky.net/api"
+
+
+function changerURL() {
+    const nouvelURL = document.getElementById("urlInput").value;
+
+    if (nouvelURL.trim() !== "") {
+        url = nouvelURL;
+    } else {
+        alert("Veuillez entrer une nouvelle URL valide.");
+    }
+}
+
 async function admin() {
             console.log(getCookie('access_token'));
     try {
-        const response = await fetch('https://badauth.demo.stchepinsky.net/api/protected_resource', {
+        const response = await fetch(url+'/protected_resource', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',

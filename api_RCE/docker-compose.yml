@@ -13,6 +13,11 @@ services:
     container_name: frontend
     ports:
       - "8000:8080"
+  frontend_safe:
+    image: ghcr.io/seaweedbraincy/safe_frontend:latest
+    container_name: frontend_safe
+    ports:
+      - "8003:8080"
   api:
     image: ghcr.io/seaweedbraincy/api_rce:latest
     container_name: api

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Remote Code Execution Page</title>
+    <link rel="stylesheet" href="index.css">
+    <script src="script.js"></script>
+
+</head>
+<body>
+
+<div class="main">
+        <div class="title">
+        <div class="above">
+            <div class="img-wrapper">
+                <img src="pexels-stephan-seeber-1261728.jpg" alt="indexbackground" loading="lazy">
+            </div>
+            <h1>Gestion de fichiers</h1>
+        <div class="ajout">
+        <div class="gauche">
+
+            <h2>Ajouter un fichier</h2>
+        <input type="file" id="fileInput" />
+
+            <h2>Nom du fichier</h2>
+    <input type="text" id="name" placeholder="Nouveau nom" />
+    <button onclick="uploadFile()">Envoyer</button>
+
+        </div>
+            <div class="droite">
+                <h2>Fichiers enregistrés</h2>
+            <table id="fileTable">
+                <thead>
+                    <tr>
+                        <th>Nom du fichier</th>
+                        <th>Supprimer</th>
+                    </tr>
+                </thead>
+                <tbody id="fileList"></tbody>
+            </table>
+            </div>
+        </div>
+    </div>
+
+        </div>
+</div>
+</body>
+</html>

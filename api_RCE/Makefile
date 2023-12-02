@@ -20,10 +20,10 @@ clean_api_secure:
 
 
 run_frontend:
-	docker compose up frontend -d
+	docker compose -f docker-compose-local.yml up frontend -d
 
 stop:
-	docker compose down
+	docker compose -f docker-compose-local.yml  down
 
 restart_frontend:
-	docker compose down frontend && docker compose up frontend -d
+	docker compose -f docker-compose-local.yml  down && docker compose -f docker-compose-local.yml up -d

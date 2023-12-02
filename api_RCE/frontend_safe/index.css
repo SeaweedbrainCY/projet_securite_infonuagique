@@ -1,0 +1,153 @@
+* {
+  margin: 0;
+  padding: 0;
+  outline: 0;
+  border: 0;
+  border-spacing: 0;
+  box-sizing: border-box;
+}
+
+.main {
+    min-height: 100vh;
+    color: white;
+    text-align: center;
+}
+
+.img-wrapper img {
+    position: absolute;
+    margin: auto;
+    right: 0;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    z-index: -100;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+.img-wrapper {
+    display: inline-block; /* change the default display type to inline-block */
+    overflow: hidden;
+}
+
+.above {
+    z-index: -99;
+    min-height: 100vh;
+    background-color: rgba(19, 19, 19, 0.42);
+}
+
+.main h1 {
+    font-size: 5vw;
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 50px;
+}
+
+.ajout {
+    padding: 20px;
+    width: 80%;
+    margin: 0 auto;
+    border-radius: 30px;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px); /* compatibilité avec safari */
+    box-shadow: 0px 10px 50px -10px #1f2121;
+    display: flex;
+    justify-content: space-between;
+}
+
+input {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 200px;
+    border: 2px solid black;
+    border-radius: 30px;
+    padding: 10px;
+}
+
+.gauche button {
+    background-color: gray;
+    border: solid 2px black;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 30px;
+    cursor: pointer;
+
+}
+
+.gauche {
+    width: 50%;
+}
+
+.droite {
+    width: 50%;
+}
+
+.droite button {
+    background-color: gray;
+    border: solid 2px black;
+    color: white;
+    padding: 5px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+table {
+    width: 80%;
+    margin: 0 auto;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+tr {
+    margin: 0 auto;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+}
+
+td, th {
+    margin: 0 auto;
+    align-items: center;
+    display: flex;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+
+thead {
+    margin: 0 auto;
+    margin-bottom: 10px;
+}
+
+#fileList {
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+}
+
+#renameInput {
+    margin-bottom: 5px;
+}
+
+@media screen and (max-width: 800px){
+    .ajout {
+        flex-direction: column;
+    }
+
+    .gauche, .droite {
+        width: 100%;
+        margin: 0 auto;
+    }
+}

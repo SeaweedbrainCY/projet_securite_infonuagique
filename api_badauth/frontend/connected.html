@@ -34,7 +34,7 @@
 async function admin() {
             console.log(getCookie('access_token'));
     try {
-        const response = await fetch('http://badauth.demo.stchepinsky.net/api/protected_resource', {
+        const response = await fetch('https://badauth.demo.stchepinsky.net/api/protected_resource', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',

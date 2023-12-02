@@ -28,4 +28,4 @@ EXPOSE 80
 USER badauthuser
 
 # Commande par défaut
-CMD ["gunicorn", "main:app", "--bind", "0.0.0.0:80", "-k" ,"uvicorn.workers.UvicornWorker"]
+CMD ["uvicorn", "main:app", "--proxy-headers", "--host", "0.0.0.0", "--port", "80"]

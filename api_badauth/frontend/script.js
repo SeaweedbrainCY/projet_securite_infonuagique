@@ -1,9 +1,21 @@
- async function registerUser() {
+let url =  "https://badauth.demo.stchepinsky.net/api"
+
+
+function changerURL() {
+    const nouvelURL = document.getElementById("urlInput").value;
+
+    if (nouvelURL.trim() !== "") {
+        url = nouvelURL;
+    } else {
+        alert("Veuillez entrer une nouvelle URL valide.");
+    }
+}
+async function registerUser() {
         const username = document.getElementById('regUsername').value;
         const password = document.getElementById('regPassword').value;
 
         try {
-            const response = await fetch('https://badauth.demo.stchepinsky.net/api/register?username='+username+'&password='+password, {
+            const response = await fetch(url+'/register?username='+username+'&password='+password, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -24,7 +36,7 @@
         const password = document.getElementById('loginPassword').value;
 
         try {
-            const response = await fetch('https://badauth.demo.stchepinsky.net/api/token?username='+username+'&password='+password, {
+            const response = await fetch(url+'/token?username='+username+'&password='+password, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -52,7 +64,7 @@
         }
 
         try {
-            const response = await fetch('https://badauth.demo.stchepinsky.net/api/protected_resource', {
+            const response = await fetch(url+'/protected_resource', {
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + token,

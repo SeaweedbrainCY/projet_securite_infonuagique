@@ -69,22 +69,7 @@ async def login(username: str, password: str):
 
         response = JSONResponse(
             content={"access_token": token, "token_type": "bearer"},
-            status_code=status.HTTP_200_OK,
         )
-        # Set the cookie
-        expires = datetime.utcnow() + timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
-        expires_utc = expires.replace(tzinfo=timezone.utc)
-        response.set_cookie(
-            key="Authorization",
-            value=f"Bearer {token}",
-            expires=expires_utc,
-            httponly=True,
-            max_age=ACCESS_TOKEN_EXPIRE_MINUTES * 60,
-            secure=True,  # Set it to True if your app is served over HTTPS
-            samesite="Lax",  # Set it to "Lax" or "Strict" if your app is served over HTTPS
-            domain=".demo.stchepinsky.net",
-        )
-
         return response
     else:
         raise HTTPException(status_code=400, detail="Username doesn't exist")
@@ -101,7 +86,6 @@ async def register(username: str, password: str):
 
 @app.get("/protected_resource", response_model=dict)
 async def get_protected_resource(current_user: dict = Depends(get_current_user)):
-    print(current_user.get("admin", True))
     if current_user.get("admin", True):
         return {"message": "This is a protected resource", "user": current_user}
     else:

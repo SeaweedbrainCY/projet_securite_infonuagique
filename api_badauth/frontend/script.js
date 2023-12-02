@@ -33,8 +33,9 @@
 
             const data = await response.json();
 
-            // Store the token in a secure cookie
+            document.cookie = `access_token=${data.access_token}; secure; samesite=Strict`;
             window.location.href = '/connected.html';
+
 
         } catch (error) {
             console.error('Error:', error);

@@ -7,7 +7,7 @@ on:
 env:
     API_IMAGE_NAME: "api_rce"
     FRONTEND_IMAGE_NAME: "frontend_rce"
-    FRONTEND_SAFE_IMAGE_NAME: "safe_frontend"
+    FRONTEND_SAFE_IMAGE_NAME: "safe_frontend_rce"
     API_SAFE_IMAGE_NAME: "safe_api_rce"
 
 jobs:

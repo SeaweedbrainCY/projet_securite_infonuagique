@@ -7,6 +7,7 @@ on:
 env:
     API_IMAGE_NAME: "api_rce"
     FRONTEND_IMAGE_NAME: "frontend_rce"
+    FRONTEND_SAFE_IMAGE_NAME: "safe_frontend"
     API_SAFE_IMAGE_NAME: "safe_api_rce"
 
 jobs:
@@ -58,3 +59,19 @@ jobs:
             docker tag $FRONTEND_IMAGE_NAME:${{ github.sha }} ghcr.io/${{ secrets.USERNAME }}/$FRONTEND_IMAGE_NAME:${{ github.sha }}
             docker push ghcr.io/${{ secrets.USERNAME }}/$FRONTEND_IMAGE_NAME:latest
             docker push ghcr.io/${{ secrets.USERNAME }}/$FRONTEND_IMAGE_NAME:${{ github.sha }}
+  build-and-publish-frontend_safe:
+    name: Build and Publish API safe Docker image
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Build
+        working-directory: ./api_RCE/frontend_safe/
+        run: docker build -t $FRONTEND_SAFE_IMAGE_NAME:latest -t $FRONTEND_SAFE_IMAGE_NAME:${{ github.sha }} .
+      - name: Login to GitHub Container Registry
+        run: echo ${{ secrets.TOKEN }} | docker login ghcr.io -u ${{ secrets.USERNAME }} --password-stdin
+      - name: Push Docker image to GitHub Container Registry
+        run: |
+          docker tag $FRONTEND_SAFE_IMAGE_NAME:latest ghcr.io/${{ secrets.USERNAME }}/$FRONTEND_SAFE_IMAGE_NAME:latest
+          docker tag $FRONTEND_SAFE_IMAGE_NAME:${{ github.sha }} ghcr.io/${{ secrets.USERNAME }}/$FRONTEND_SAFE_IMAGE_NAME:${{ github.sha }}
+          docker push ghcr.io/${{ secrets.USERNAME }}/$FRONTEND_SAFE_IMAGE_NAME:latest
+          docker push ghcr.io/${{ secrets.USERNAME }}/$FRONTEND_SAFE_IMAGE_NAME:${{ github.sha }}
